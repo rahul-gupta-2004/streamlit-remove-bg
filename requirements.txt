@@ -1,0 +1,8 @@
+fastapi
+streamlit
+rembg[cpu]
+uvicorn
+python-multipart
+requests
+Pillow
+numpy
