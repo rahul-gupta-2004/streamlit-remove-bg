@@ -7,13 +7,12 @@ from rembg import remove
 
 app = FastAPI()
 
+@app.get("/")
+async def root():
+    return {"message": "Background Remover API is running"}
+
 @app.post("/process")
 async def process(file: UploadFile = File(...)):
-    # 1. Get the image data
     data = await file.read()
-    # 2. Remove background
     output = remove(data)
-    # 3. Send it back
     return Response(content=output, media_type="image/png")
-
-

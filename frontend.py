@@ -1,7 +1,9 @@
 import streamlit as st
 import requests
 
-api_url = "http://localhost:8000/process"
+# api_url = "http://localhost:8000/process"
+# Replace with your actual API URL
+api_url = "https://bg-remover-api.streamlit.app/process"
 
 st.title("Background Remover")
 
@@ -11,17 +13,13 @@ if file:
     st.image(file, caption="Original Image")
     
     if st.button("Remove Background"):
-        # The spinner will show up here
         with st.spinner("Processing... please wait"):
             try:
-                # Send to FastAPI
                 res = requests.post(url=api_url, files={"file": file})
                 
-                
-                # Show Result
                 if res.status_code == 200:
                     st.image(res.content, caption="Background Removed!")
                 else:
-                    st.error("Backend error. Check your FastAPI terminal.")
+                    st.error("Backend error. Check your API logs.")
             except Exception as e:
-                st.error(f"Connection failed. Is the backend running? Error: {e}")
+                st.error(f"Connection failed. Error: {e}")
