@@ -1,5 +1,4 @@
-# requirements: pip install fastapi streamlit rembg uvicorn python-multipart
-# uvicorn remImage:app --reload
+# uvicorn streamlit_app:app --reload
 
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import Response
@@ -18,6 +17,5 @@ async def process(file: UploadFile = File(...)):
     output = remove(data)
     return Response(content=output, media_type="image/png")
 
-# Add this at the end of your existing remImage.py
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8501)
